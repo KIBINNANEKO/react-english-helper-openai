@@ -1,0 +1,17 @@
+@import "mixins.scss";
+@import "nullstyle.scss";
+@import "var.scss";
+
+:global{
+	html, body{
+		min-width: 320px;
+		height: 100vh;
+		font-family: 'Comfortaa';
+	}
+}
+
+.container {
+	margin: 0 auto;
+	@include adaptiv-value("padding-left", 107, 8, 0);
+	@include adaptiv-value("padding-right", 107, 8, 0);
+}

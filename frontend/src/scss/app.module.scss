@@ -4,14 +4,17 @@
 
 :global{
 	html, body{
-		min-width: 320px;
 		height: 100vh;
-		font-family: 'Comfortaa';
+		min-width: $MinWidth;
+		max-width: $MaxWidth;
+		font-family: $MainFont;
+		background-color: $black;
+		color: $mainTextColor;
 	}
 }
 
 .container {
 	margin: 0 auto;
-	@include adaptiv-value("padding-left", 107, 8, 0);
-	@include adaptiv-value("padding-right", 107, 8, 0);
+	@include adaptiv-value("padding-left", $MaxPadding, $MinPadding, 0);
+	@include adaptiv-value("padding-right", $MaxPadding, $MinPadding, 0);
 }

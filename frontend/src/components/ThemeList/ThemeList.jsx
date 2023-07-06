@@ -1,9 +1,9 @@
-import styles from "./theme-list.module.scss"
+import styles from "./theme-list.module.scss";
 
 function ThemeList () {
 	return(
 		<div>
-			<p className={styles.title}>Aaaaaaaa</p>
+			<p className={styles.title}></p>
 		</div>
 	);
 };

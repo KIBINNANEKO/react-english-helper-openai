@@ -1,4 +1,4 @@
-import GreetingPage from "./pages/GreetingPage";
+import GreetingPage from "./pages/GreetingPage/GreetingPage";
 
 import styles from "./scss/app.module.scss";
 
@@ -14,7 +14,7 @@ function RoutesWindow() {
   ];
 
   return (
-    <div className={styles.container}>
+    <div>
       <Routes>
         {routes.map((route, index) => {
           const { Component, ...rest } = route;

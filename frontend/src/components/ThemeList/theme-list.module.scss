@@ -1,3 +1,27 @@
+@import '../../scss/var.scss';
+@import '../../scss/mixins.scss';
+
 .title{
-	font-size: 50px;
+	@include adaptiv-value('font-size', 28, 24, 0);
+	color: $mainTextColor;
+	font-weight: $ThemeHeadersWeight;
+	line-height: 130%;
+
+	margin-bottom: 2vh;
+
+}
+
+.subtitle{
+	font-size: 19px;
+	line-height: 185%;
+	color: $white;
+
+	&:hover{
+		color: $mainTextColor;
+	}
+	
+
+	margin-left: 5%;
+
+	cursor: pointer;
 }

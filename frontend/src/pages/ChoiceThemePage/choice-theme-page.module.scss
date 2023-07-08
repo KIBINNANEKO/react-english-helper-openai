@@ -1,0 +1,54 @@
+@import '../../scss/mixins.scss';
+@import '../../scss/var.scss';
+
+.page{
+	width: 100%;
+	height: 100vh;
+
+	position: relative;
+	padding-top: 10vh;
+	padding-bottom: 10vh;
+	overflow-x:hidden;
+
+	.grid{
+		display: grid;
+		grid-row-gap: 2vh;
+		grid-column-gap: 2.5vw;
+
+		@media(max-width: 1180px) {
+			grid-template-columns: 1fr 1fr;
+			grid-column-gap: 8vw;
+		}
+
+		@media(max-width: 640px){
+			grid-template-columns: 1fr;
+		}
+
+		grid-template-columns: 25vw 25vw 25vw;
+	}
+
+	.bg {
+		background-image: url('../../assets/logo512.png');
+		background-repeat: no-repeat;
+		opacity: 0.1;
+
+		@media(max-width: 1180px) {
+			background-position: left;
+			opacity: 0.1;
+		}
+
+		@media(max-width: 640px) {
+			background-position: right;
+		}
+
+		@include adaptiv-value('background-size', 1400, 900, 0);
+		width: 100%;
+		height: 100%;
+
+		position: absolute;
+		background-position: bottom;
+		top: 0%;
+		@include adaptiv-value("left", 865, -200, 0);
+
+	}
+}

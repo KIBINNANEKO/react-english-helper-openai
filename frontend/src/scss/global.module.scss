@@ -1,0 +1,10 @@
+@import "./mixins.scss";
+@import "./var.scss";
+
+.pages_title{
+	@include adaptiv-value('font-size', 38, 20, 0);
+	color: $white;
+	line-height: 130%;
+
+	margin-bottom: 3vh;
+}

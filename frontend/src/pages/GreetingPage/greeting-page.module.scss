@@ -11,6 +11,7 @@
 	padding-top: 23vh;
 	padding-bottom: 13vh;
 	
+	
 	.title{
 		@include adaptiv-value('font-size', 96 , 45, 0);
 		font-weight: $GreetingTitleWeight;
@@ -75,7 +76,7 @@
 
 		position: absolute;
 		top: 10%;
-		@include adaptiv-value("left", 1265, 25, 8);
+		@include adaptiv-value("left", 1265, 25, 0);
 
 	}
 

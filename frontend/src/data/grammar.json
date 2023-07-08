@@ -1,0 +1,103 @@
+{
+	"themes": [
+		{
+			"id": 0,
+			"title": "Дієслово",
+			"themes": [
+				"Герундій",
+				"Інфінітив",
+				"Неправильні дієслова",
+				"Спосіб дієслова",
+				"Дієприкметник",
+				"Фразові дієслова",
+				"Умовний спосіб",
+				"Дієслово to be",
+				"Види дієслів"
+			]
+		},
+			{
+			"id": 1,
+			"title": "Модальні дієслова",
+			"themes": [
+				"Can та Could",
+				"Dare",
+				"Had better",
+				"Have to",
+				"May та Might",
+				"Must",
+				"Need",
+				"Shall",
+				"Should и Ought to",
+				"To be to",
+				"Will та Would"
+			]
+		},
+		{
+			"id": 2,
+			"title": "Частини мови",
+			"themes": [
+				"Прикметники",
+				"Прислівники",
+				"Артикль",
+				"Сполучники",
+				"Вказівні займенники",
+				"Неозначені займенники",
+				"Вигуки",
+				"Неправильні форми множини",
+				"Іменник",
+				"Числівники",
+				"Прийменники",
+				"Займенники",
+				"Питальні слова",
+				"Взаємні займенники",
+				"Відносні займенники"
+			]
+		},
+		{
+			"id": 3,
+			"title": "Часи дієслова",
+			"themes": [
+				"Future Continuous",
+				"Future in the Past",
+				"Future Perfect",
+				"Future Perfect Continuous",
+				"Future Simple",
+				"Have something done",
+				"Пасивний стан",
+				"Past Continuous",
+				"Past Perfect",
+				"Past Perfect Continuous",
+				"Past Simple",
+				"Present Continuous",
+				"Present Perfect",
+				"Present Perfect Continuous",
+				"Present Simple",
+				"Узгодження часів"
+			]
+		},
+		{
+			"id": 4,
+			"title": "Речення",
+			"themes": [
+				"Складні речення",
+				"Умовні речення",
+				"Непряма мова",
+				"Головні члени речення",
+				"Другорядні члени речення",
+				"Прості речення",
+				"Типи питань",
+				"Порядок слів у реченні"
+			]
+		},
+		{
+			"id": 5,
+			"title": "Обороти та Конструкції:",
+			"themes": [
+				"There is / There are",
+				"To be going to",
+				"Used to"
+			]
+		}
+
+	]
+}

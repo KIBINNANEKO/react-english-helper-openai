@@ -1,9 +1,15 @@
 import styles from "./theme-list.module.scss";
 
-function ThemeList () {
+function ThemeList (props) {
+
+	const {title, themes} = props;
+
 	return(
 		<div>
-			<p className={styles.title}></p>
+			<h3>{title}</h3>
+			{themes?.map(theme => (
+				<h4 key={theme}>{theme}</h4>
+			))}
 		</div>
 	);
 };

@@ -1,6 +1,5 @@
+import ChoiceThemePage from "./pages/ChoiceThemePage/ChoiceThemePage";
 import GreetingPage from "./pages/GreetingPage/GreetingPage";
-
-import styles from "./scss/app.module.scss";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -10,18 +9,20 @@ function RoutesWindow() {
       index: true,
       path: '/greeting',
       Component: GreetingPage
+    },
+    {
+      path: '/choice-theme',
+      Component: ChoiceThemePage
     }
   ];
 
   return (
-    <div>
       <Routes>
         {routes.map((route, index) => {
           const { Component, ...rest } = route;
           return <Route key={index} {...rest} element={<Component />} />
         })};
       </Routes>
-    </div>
   );
 };
 

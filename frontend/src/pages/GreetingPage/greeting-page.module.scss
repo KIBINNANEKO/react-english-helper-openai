@@ -74,6 +74,7 @@
 		width: 100%;
 		height: 100%;
 
+		pointer-events: none;
 		position: absolute;
 		top: 10%;
 		@include adaptiv-value("left", 1265, 25, 0);

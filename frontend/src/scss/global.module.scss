@@ -8,3 +8,9 @@
 
 	margin-bottom: 3vh;
 }
+
+.container {
+	margin: 0 auto;
+	@include adaptiv-value("padding-left", $MaxPadding, $MinPadding, 0);
+	@include adaptiv-value("padding-right", $MaxPadding, $MinPadding, 0);
+}

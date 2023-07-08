@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+
 import styles from "./greeting-page.module.scss";
-import mainStyles from "../../scss/app.module.scss";
+import globalStyles from "../../scss/global.module.scss";
 
 function GreetingPage(){
 	return(
 		<div className={styles.page}>
-			<div className={mainStyles.container}>
+			<div className={globalStyles.container}>
 				<h2 className={styles.title}>
 					Hello, World!
 				</h2>

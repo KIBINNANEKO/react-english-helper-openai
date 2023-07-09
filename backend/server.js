@@ -21,6 +21,7 @@ const openaiConfiguration = new Configuration({
 const openai = new OpenAIApi(openaiConfiguration);
 
 let isFirstMessage = true;
+let messages = [];
 
 app.post('/dialog', async (req, res) => {
 	const { teacher } = req.body;
@@ -44,17 +45,15 @@ app.post('/dialog', async (req, res) => {
 			return;
 		}
 
-		const messages = isFirstMessage
-			? [
-				{ role: 'system', content: 'Ви - користувач' },
+		isFirstMessage
+			? messages.push(
 				{
 					role: 'user',
-					content: `Будь як вчилель англійської мови, розмовляй тільки на теми що стосуються англійської, якщо будуть інші питання, відповідай "Я - твій віртуальний вчитель, і відповідаю на питання тільки які стосуються англійськох мови". Допоможи мені розібратися з темою "${teacher}", на це повідомлення відповіси "Я Mystic Teacher, і готовий допомогти тобі з темою "${teacher}""`,
-				},
-			]
-			: [
-				{ role: 'user', content: teacher },
-			];
+					content: `Будь як вчилель англійської мови, розмовляй тільки на українській мові (я не розумію російську) тільки на теми що стосуються англійської. Допоможи мені розібратися з темою "${teacher}" (в англійській мові), на це повідомлення відповіси "Я Mystic Teacher, і готовий допомогти тобі з темою "${teacher}"". А далі розкажи основи та кілька прикладів використання. Після кожного твого повідомлення, враховуючи це, передай 3 можлививих запитання у вигляді js масиву, які допоможуть краще зрозуміти тему, і більше нічого зайвого.`
+				})
+			: messages.push(
+				{ role: 'user', content: teacher }
+				);
 
 		const completion = await openai.createChatCompletion({
 			model: 'gpt-3.5-turbo',
@@ -64,7 +63,7 @@ app.post('/dialog', async (req, res) => {
 
 		isFirstMessage = false;
 
-		console.log(completion);
+		messages.push(completion.data.choices[0].message)
 
 		res.status(200).json(completion.data);
 	} catch (error) {

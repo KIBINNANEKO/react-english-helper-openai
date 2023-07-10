@@ -3,12 +3,12 @@ import { createContext, useContext, useState } from "react";
 const ThemeContext = createContext(undefined);
 
 export const ThemeProvider = ({ children }) => {
-	const [theme, setTheme] = useState("");
+	const [selectedTheme, setTheme] = useState("");
 
 	return (
 		<ThemeContext.Provider
 			value={{
-				theme,
+				selectedTheme,
 				choiceTheme: (theme) => setTheme(theme),
 			}}
 		>

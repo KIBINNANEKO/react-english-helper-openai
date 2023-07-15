@@ -1,0 +1,114 @@
+@import '../../scss/mixins.scss';
+@import '../../scss/var.scss';
+
+.page{
+	width: 100%;
+	height: 100vh;
+
+	position: relative;
+	padding-top: 5vh;
+	overflow-x: hidden;
+
+	.main_block {
+		width: 60vw;
+
+		@media(max-width: 1365px) {
+			width: 100%;
+		}
+
+		.messages_window {
+			border: 1px solid rgba(118, 209, 169, 0.50);
+			border-radius: 12px;
+
+			height: 60vh;
+		}
+
+		.tags{
+			display: flex;
+			flex-wrap: wrap;
+
+			margin-top: 2vh;
+			margin-bottom: 2vh;
+
+			gap: 10px;
+
+			.tags_item{
+				cursor: pointer;
+				transition: 0.4s;
+
+				border: 1px solid rgba(118, 209, 169, 0.50);
+				border-radius: 12px;
+
+				padding: 10px;
+
+				&:hover {
+						color: #b3eed4;
+						border: 1px solid #b3eed4;
+					}
+			}
+			
+			}
+
+			.textarea_block{
+				display: flex;
+
+				.textarea {
+						@include adaptiv-value('font-size', 22, 15, 0);
+						border: 1px solid rgba(118, 209, 169, 0.50);
+						border-radius: 12px;
+						background-color: $black;
+						color: $white;
+						font-weight: 700;
+				
+						resize: none;
+						width: 90%;
+						height: 10vh;
+				
+						padding: 15px;
+					}
+
+					.textarea_buttons{
+						display: flex;
+						flex-direction: column;
+
+						height: 100%;
+						width: 10%;
+
+						.textarea_button_send{
+							padding: 30px;
+							height: 50%;
+
+						}
+
+						.textarea_button_clear{
+							padding: 30px;
+							height: 50%;
+						}
+					}
+
+			}
+
+	
+		}
+
+	.bg {
+		background-image: url('../../assets/icons/logo512.png');
+		background-repeat: no-repeat;
+		opacity: 0.2;
+
+		@media(max-width: 800px) {
+			opacity: 0.1;
+		}
+
+		@include adaptiv-value('background-size', 1500, 800, 0);
+		width: 100%;
+		height: 100%;
+
+		pointer-events: none;
+		position: absolute;
+		top: 10%;
+		@include adaptiv-value("left", 1365, 25, 0);
+
+	}
+}
+

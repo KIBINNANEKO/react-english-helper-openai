@@ -14,7 +14,7 @@ const port = 3001;
 app.use(express.json());
 
 const openaiConfiguration = new Configuration({
-	apiKey: process.env.OPENAI_API_KEYs
+	apiKey: process.env.OPENAI_API_KEY
 });
 
 const openai = new OpenAIApi(openaiConfiguration);

@@ -11,7 +11,7 @@ function DialogPage () {
 	const { selectedTheme } = useTheme();
 
 	useEffect(()=>{
-		sendMessage("Продовжуй поглиблюватися в тему, я слухаю");
+		sendMessage(selectedTheme);
 	}, []);
 
 	return(

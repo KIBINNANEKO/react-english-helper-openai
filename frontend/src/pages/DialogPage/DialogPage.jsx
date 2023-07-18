@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import sendMessage from "../../helpers/api";
-
 import styles from "./dialog-page.module.scss";
 import globalStyles from "../../scss/global.module.scss";
+
+import { useEffect } from "react";
+import sendMessage from "../../helpers/api";
 import { useTheme } from "../../context/themeContext";
 
 

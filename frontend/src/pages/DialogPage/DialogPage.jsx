@@ -1,24 +1,37 @@
 import styles from "./dialog-page.module.scss";
 import globalStyles from "../../scss/global.module.scss";
 
-import { useEffect, useRef } from "react";
-import sendMessage from "../../helpers/api";
+import { useEffect, useState } from "react";
 import { useTheme } from "../../context/themeContext";
 import MessageItem from "./components/MessageItem/MessageItem";
-import { useScrollbar } from "../../hooks/useScrollbar";
+import useDebounce from "../../hooks/useDebounce";
+import axios from "axios";
+import useInput from "../../hooks/useInput";
 
 
 function DialogPage () {
 
 	const { selectedTheme } = useTheme();
 
+	const [messages, setMessages] = useState([]);
+	const userMessage = useInput('');
+
+	async function sendMessage(textMessage) {
+		try {
+			const response = await axios.post('http://localhost:3001' + '/dialog', { teacher: textMessage });
+			const message = await response.data.choices[0].message;
+			setMessages(prev => [...prev, message]);
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	const debounsedSendMessage = useDebounce(sendMessage, 2000);
+
 	useEffect(()=>{
-		sendMessage(selectedTheme);
+		debounsedSendMessage(selectedTheme);
+		console.log(messages);
 	}, []);
-
-	const todoWrapper = useRef(null);
-
-	useScrollbar(todoWrapper);
 
 	return(
 		<div className={styles.page}>
@@ -27,12 +40,12 @@ function DialogPage () {
 					<h2 className={globalStyles.pages_title}>
 						Dialogue on the topic of "{selectedTheme}"
 					</h2>
-					<div className={styles.messages_window} ref={todoWrapper}>
-						<MessageItem role='user' message='Hello, im gpt model that was created to help humans, how can i be useful to yuo. Call me a Mystic created. Hello, im gpt how that was created to help humans, how can i be useful to yuo. Call me a Mystic Teacher. Hello, im gpt model that was how to help humans, how can i created useful to yuo me model a humans Teacher. Hello, im gpt model that was created to help humans, how can i be useful to yuo. Call me a Mystic created. Hello, im gpt how that was created to help humans, how can i be useful to yuo. Call me a Mystic Teacher. Hello, im gpt model that was how to help humans, how can i created useful to yuo me model a humans Teacher.'/>
-						<MessageItem role='assistant' message='Hello!)'/>
-						<MessageItem role='user' message='Hello, im gpt model that was created to help humans, how can i be useful to yuo. Call me a Mystic created. Hello, im gpt how that was created to help humans, how can i be useful to yuo. Call me a Mystic Teacher. Hello, im gpt model that was how to help humans, how can i created useful to yuo me model a humans Teacher. Hello, im gpt model that was created to help humans, how can i be useful to yuo. Call me a Mystic created. Hello, im gpt how that was created to help humans, how can i be useful to yuo. Call me a Mystic Teacher. Hello, im gpt model that was how to help humans, how can i created useful to yuo me model a humans Teacher.' />
-						<MessageItem role='user' message='Hello, im gpt model that was created to help humans, how can i be useful to yuo. Call me a Mystic created. Hello, im gpt how that was created to help humans, how can i be useful to yuo. Call me a Mystic Teacher. Hello, im gpt model that was how to help humans, how can i created useful to yuo me model a humans Teacher. Hello, im gpt model that was created to help humans, how can i be useful to yuo. Call me a Mystic created. Hello, im gpt how that was created to help humans, how can i be useful to yuo. Call me a Mystic Teacher. Hello, im gpt model that was how to help humans, how can i created useful to yuo me model a humans Teacher.' />
-						<MessageItem role='user' message='Hello, im gpt model that was created to help humans, how can i be useful to yuo. Call me a Mystic created. Hello, im gpt how that was created to help humans, how can i be useful to yuo. Call me a Mystic Teacher. Hello, im gpt model that was how to help humans, how can i created useful to yuo me model a humans Teacher. Hello, im gpt model that was created to help humans, how can i be useful to yuo. Call me a Mystic created. Hello, im gpt how that was created to help humans, how can i be useful to yuo. Call me a Mystic Teacher. Hello, im gpt model that was how to help humans, how can i created useful to yuo me model a humans Teacher.' />
+					<div className={styles.messages_window}>
+						{
+							messages.map((content, index) => (
+								<MessageItem role={content?.role} message={content?.content} key={index}/>
+							))
+						}
 					</div>
 					<div className={styles.tags}>
 						<div className={styles.tags_item}>Продовжуй поглиблюватися</div>
@@ -42,10 +55,10 @@ function DialogPage () {
 						<div className={styles.tags_item}>Зрозумів</div>
 					</div>
 					<div className={styles.textarea_block}>
-						<textarea className={styles.textarea}/>
+						<textarea className={styles.textarea} value={userMessage.value} onChange={userMessage.onChange}/>
 						<div className={styles.textarea_buttons}>
-							<button className={styles.textarea_button_send}>Send</button>
-							<button className={styles.textarea_button_clear}>Clear</button>
+							<button className={styles.textarea_button_send} onClick={() => sendMessage(userMessage.value)}>Send</button>
+							<button className={styles.textarea_button_clear} onClick={userMessage.clear}>Clear</button>
 						</div>
 					</div>
 				</div>

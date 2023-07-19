@@ -1,2 +1,19 @@
 @import '../../../../scss/mixins.scss';
 @import '../../../../scss/var.scss';
+
+.grid {
+	display: grid;
+	grid-row-gap: 2vh;
+	grid-column-gap: 2.5vw;
+
+	@media(max-width: 1180px) {
+		grid-template-columns: 1fr 1fr;
+		grid-column-gap: 8vw;
+	}
+
+	@media(max-width: 640px) {
+		grid-template-columns: 1fr;
+	}
+
+	grid-template-columns: 25vw 25vw 25vw;
+}

@@ -1,0 +1,22 @@
+@import '../../../../scss/mixins.scss';
+@import '../../../../scss/var.scss';
+
+.message_block{
+	display: flex;
+	@include adaptiv-value('gap', 20, 10, 0);
+
+	@include adaptiv-value('padding', 30, 10, 0);
+	@include adaptiv-value('padding-bottom', 15, 7, 0);
+
+	.message{
+		@include adaptiv-value('font-size', 18, 12, 0);
+		color: $white;
+		line-height: 120%;
+
+		margin-top: 2px;
+	}
+
+	.icon{
+		@include adaptiv-value('width', 50, 40, 0);
+	}
+}

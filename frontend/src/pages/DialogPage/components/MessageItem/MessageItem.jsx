@@ -12,7 +12,7 @@ function MessageItem(props){
 				<img className={styles.icon} src={role === 'user' ? studentIcon : gptIcon}/>
 			</div>
 			<div className={styles.message}>
-				<p>{message}</p>
+				<p dangerouslySetInnerHTML={message} />
 			</div>
 		</div>
 	);

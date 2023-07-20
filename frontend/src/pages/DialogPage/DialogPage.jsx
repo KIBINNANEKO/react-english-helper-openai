@@ -16,11 +16,13 @@ function DialogPage () {
 	const [messages, setMessages] = useState([]);
 	const userMessage = useInput('');
 
-	async function sendMessage(textMessage) {
+	async function sendMessage(textMessage, needToClear) {
 		try {
-			const response = await axios.post('http://localhost:3001' + '/dialog', { teacher: textMessage });
+			const response = await axios.post('http://localhost:3001' + '/dialog', { teacher: textMessage, needToClear: needToClear });
 			const message = await response.data.choices[0].message;
-			setMessages(prev => [...prev, message]);
+			const newObj = await { ...message, content: message.content.replace(/\n/g, '<br/>')};
+			console.log(newObj);
+			setMessages(prev => [...prev, newObj]);
 		} catch (error) {
 			console.log(error)
 		}
@@ -29,9 +31,23 @@ function DialogPage () {
 	const debounsedSendMessage = useDebounce(sendMessage, 2000);
 
 	useEffect(()=>{
-		debounsedSendMessage(selectedTheme);
-		console.log(messages);
+		debounsedSendMessage(selectedTheme, false);
+
+		return function(){
+			debounsedSendMessage('no data', true);
+		}
 	}, []);
+
+	function submitMessage(message){
+		try{
+			setMessages(prev => [...prev, { role: 'user', content: message }]);
+			userMessage.clear();
+			debounsedSendMessage(message, false);
+		}
+		catch(error){
+			console.log(error);
+		}
+	}
 
 	return(
 		<div className={styles.page}>
@@ -43,7 +59,7 @@ function DialogPage () {
 					<div className={styles.messages_window}>
 						{
 							messages.map((content, index) => (
-								<MessageItem role={content?.role} message={content?.content} key={index}/>
+								<MessageItem role={content?.role} message={{ __html: content?.content }} key={index}/>
 							))
 						}
 					</div>
@@ -57,7 +73,7 @@ function DialogPage () {
 					<div className={styles.textarea_block}>
 						<textarea className={styles.textarea} value={userMessage.value} onChange={userMessage.onChange}/>
 						<div className={styles.textarea_buttons}>
-							<button className={styles.textarea_button_send} onClick={() => sendMessage(userMessage.value)}>Send</button>
+							<button className={styles.textarea_button_send} onClick={() => submitMessage(userMessage.value)}>Send</button>
 							<button className={styles.textarea_button_clear} onClick={userMessage.clear}>Clear</button>
 						</div>
 					</div>

@@ -22,10 +22,40 @@ const openai = new OpenAIApi(openaiConfiguration);
 let isFirstMessage = true;
 let messages = [];
 
+async function dataRequest(teacher, needToClear){
+	if(needToClear){
+		messages = [];
+		isFirstMessage = true;
+	} else{
+		if(isFirstMessage){
+			messages.push(
+				{ role: 'user',
+					content: `Будь як вчилель англійської мови, розмовляй тільки на українській мові (я не розумію російську) тільки на теми що стосуються англійської. Допоможи мені розібратися з темою "${teacher}" (в англійській мові), на це повідомлення відповіси "Я Mystic Teacher, і готовий допомогти тобі з темою "${teacher}"". А далі розкажи основи та кілька прикладів використання.`
+				})
+		 } else {
+				messages.push(
+					{ role: 'user', content: teacher }
+				);
+		 }
+
+		const completion = await openai.createChatCompletion({
+			model: 'gpt-3.5-turbo',
+			messages: messages,
+			temperature: 0.5,
+		});
+
+		isFirstMessage = false;
+
+		messages.push(completion.data.choices[0].message);
+
+		return completion.data;
+	};
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////
 
 app.post('/dialog', async (req, res) => {
-	const { teacher } = req.body;
+	const { teacher, needToClear } = req.body;
 
 	try {
 		if (!openaiConfiguration.apiKey) {
@@ -46,27 +76,9 @@ app.post('/dialog', async (req, res) => {
 			return;
 		}
 
-		isFirstMessage
-			? messages.push(
-				{
-					role: 'user',
-					content: `Будь як вчилель англійської мови, розмовляй тільки на українській мові (я не розумію російську) тільки на теми що стосуються англійської. Допоможи мені розібратися з темою "${teacher}" (в англійській мові), на це повідомлення відповіси "Я Mystic Teacher, і готовий допомогти тобі з темою "${teacher}"". А далі розкажи основи та кілька прикладів використання. Після кожного твого повідомлення, враховуючи це, передай 3 можлививих запитання у вигляді js масиву, які допоможуть краще зрозуміти тему, і більше нічого зайвого.`
-				})
-			: messages.push(
-				{ role: 'user', content: teacher }
-				);
+		const data = await dataRequest(teacher, needToClear);
 
-		const completion = await openai.createChatCompletion({
-			model: 'gpt-3.5-turbo',
-			messages: messages,
-			temperature: 0.8,
-		});
-
-		isFirstMessage = false;
-
-		messages.push(completion.data.choices[0].message)
-
-		res.status(200).json(completion.data);
+		res.status(200).json(data);
 
 	} catch (error) {
 		if (error.response && error.response.data.error.code === 'context_length_exceeded') {
@@ -77,7 +89,7 @@ app.post('/dialog', async (req, res) => {
 			const completion = await openai.createChatCompletion({
 				model: 'gpt-3.5-turbo',
 				messages: messages,
-				temperature: 0.8,
+				temperature: 0.5,
 			});
 
 			isFirstMessage = false;

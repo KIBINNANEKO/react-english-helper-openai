@@ -7,6 +7,7 @@ import MessageItem from "./components/MessageItem/MessageItem";
 import useDebounce from "../../hooks/useDebounce";
 import axios from "axios";
 import useInput from "../../hooks/useInput";
+import MessageWindow from "./components/MessageWindow/MessageWindow";
 
 
 function DialogPage () {
@@ -21,7 +22,7 @@ function DialogPage () {
 			const response = await axios.post('http://localhost:3001' + '/dialog', { teacher: textMessage, needToClear: needToClear });
 			const message = await response.data.choices[0].message;
 			const newObj = await { ...message, content: message.content.replace(/\n/g, '<br/>')};
-			console.log(newObj);
+			console.log(response);
 			setMessages(prev => [...prev, newObj]);
 		} catch (error) {
 			console.log(error)
@@ -56,27 +57,14 @@ function DialogPage () {
 					<h2 className={globalStyles.pages_title}>
 						Dialogue on the topic of "{selectedTheme}"
 					</h2>
-					<div className={styles.messages_window}>
-						{
-							messages.map((content, index) => (
-								<MessageItem role={content?.role} message={{ __html: content?.content }} key={index}/>
-							))
-						}
-					</div>
-					<div className={styles.tags}>
+					<MessageWindow messages={messages} userMessage={userMessage} onSendMessage={submitMessage} />
+					{/* <div className={styles.tags}>
 						<div className={styles.tags_item}>Продовжуй поглиблюватися</div>
 						<div className={styles.tags_item}>Продовжуй поглиблюватися в тему, я слухаю</div>
 						<div className={styles.tags_item}>Як це використовувати</div>
 						<div className={styles.tags_item}>Продовжуй поглиблюватися в тему</div>
 						<div className={styles.tags_item}>Зрозумів</div>
-					</div>
-					<div className={styles.textarea_block}>
-						<textarea className={styles.textarea} value={userMessage.value} onChange={userMessage.onChange}/>
-						<div className={styles.textarea_buttons}>
-							<button className={styles.textarea_button_send} onClick={() => submitMessage(userMessage.value)}>Send</button>
-							<button className={styles.textarea_button_clear} onClick={userMessage.clear}>Clear</button>
-						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 			<div className={styles.bg} />

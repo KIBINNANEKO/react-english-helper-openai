@@ -1,0 +1,98 @@
+@import './src/scss/mixins.scss';
+@import './src/scss/var.scss';
+
+.messages_window {
+	border: 1px solid rgba(118, 209, 169, 0.50);
+	border-radius: 12px;
+
+	height: 70vh;
+	max-height: 70vh;
+
+	overflow: auto;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	scroll-behavior: smooth;
+
+&::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
+}
+
+.textarea_block {
+	display: flex;
+	gap: 8px;
+
+	height: 10vh;
+
+	margin-top: 2vh;
+
+.textarea {
+	@include adaptiv-value('font-size', 22, 15, 0);
+	border: 1px solid rgba(118, 209, 169, 0.50);
+	border-radius: 12px;
+	background-color: $black;
+	color: $white;
+	font-weight: 700;
+
+	resize: none;
+	width: 90%;
+
+	padding: 15px;
+
+	&:focus {
+		border: 1px solid rgba(118, 209, 169, 0.8);
+		}
+
+	@media (max-width: 850px) {
+		width: 70%;
+		}
+	}
+
+.textarea_buttons {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	width: 10%;
+
+* {
+	flex: 0 0 47%;	
+
+@include adaptiv-value('font-size', 22, 15, 0);
+	border-radius: 12px;
+	background-color: $black;
+	font-weight: 700;
+}
+
+.textarea_button_send {
+	border: 1px solid rgba(118, 209, 169, 0.5);
+	color: rgba(118, 209, 169, 0.5);
+	transition: 0.3s;
+
+&:hover {
+	border: 1px solid rgba(118, 209, 169, 1);
+	color: rgba(118, 209, 169, 1);
+}
+
+}
+
+.textarea_button_clear {
+	border: 1px solid rgba(209, 118, 118, 0.5);
+	color: rgba(209, 118, 118, 0.5);
+	transition: 0.3s;
+
+&:hover {
+	border: 1px solid rgba(209, 118, 118, 1);
+	color: rgba(209, 118, 118, 1);
+}
+}
+
+@media (max-width: 850px) {
+	width: 30%;
+}
+
+}
+
+}

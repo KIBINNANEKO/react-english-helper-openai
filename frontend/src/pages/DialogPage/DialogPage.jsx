@@ -3,7 +3,6 @@ import globalStyles from "../../scss/global.module.scss";
 
 import { useEffect, useState } from "react";
 import { useTheme } from "../../context/themeContext";
-import MessageItem from "./components/MessageItem/MessageItem";
 import useDebounce from "../../hooks/useDebounce";
 import axios from "axios";
 import useInput from "../../hooks/useInput";
@@ -13,7 +12,6 @@ import MessageWindow from "./components/MessageWindow/MessageWindow";
 function DialogPage () {
 
 	const { selectedTheme } = useTheme();
-
 	const [messages, setMessages] = useState([]);
 	const userMessage = useInput('');
 
@@ -22,7 +20,6 @@ function DialogPage () {
 			const response = await axios.post('http://localhost:3001' + '/dialog', { teacher: textMessage, needToClear: needToClear });
 			const message = await response.data.choices[0].message;
 			const newObj = await { ...message, content: message.content.replace(/\n/g, '<br/>')};
-			console.log(response);
 			setMessages(prev => [...prev, newObj]);
 		} catch (error) {
 			console.log(error)
@@ -30,6 +27,17 @@ function DialogPage () {
 	}
 
 	const debounsedSendMessage = useDebounce(sendMessage, 2000);
+
+	function submitMessage(message) {
+		try {
+			setMessages(prev => [...prev, { role: 'user', content: message }]);
+			userMessage.clear();
+			debounsedSendMessage(message, false);
+		}
+		catch (error) {
+			console.log(error);
+		}
+	}
 
 	useEffect(()=>{
 		debounsedSendMessage(selectedTheme, false);
@@ -39,17 +47,6 @@ function DialogPage () {
 		}
 	}, []);
 
-	function submitMessage(message){
-		try{
-			setMessages(prev => [...prev, { role: 'user', content: message }]);
-			userMessage.clear();
-			debounsedSendMessage(message, false);
-		}
-		catch(error){
-			console.log(error);
-		}
-	}
-
 	return(
 		<div className={styles.page}>
 			<div className={globalStyles.container}>
@@ -58,13 +55,7 @@ function DialogPage () {
 						Dialogue on the topic of "{selectedTheme}"
 					</h2>
 					<MessageWindow messages={messages} userMessage={userMessage} onSendMessage={submitMessage} />
-					{/* <div className={styles.tags}>
-						<div className={styles.tags_item}>Продовжуй поглиблюватися</div>
-						<div className={styles.tags_item}>Продовжуй поглиблюватися в тему, я слухаю</div>
-						<div className={styles.tags_item}>Як це використовувати</div>
-						<div className={styles.tags_item}>Продовжуй поглиблюватися в тему</div>
-						<div className={styles.tags_item}>Зрозумів</div>
-					</div> */}
+					{/* <div className={styles.tags}><div className={styles.tags_item}>Продовжуй поглиблюватися</div></div> */}
 				</div>
 			</div>
 			<div className={styles.bg} />

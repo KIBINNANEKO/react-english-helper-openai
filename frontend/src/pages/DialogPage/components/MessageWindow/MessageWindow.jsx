@@ -22,10 +22,10 @@ const MessageWindow = ({ messages, userMessage, onSendMessage, isLoading }) => {
 		<div>
 			<div className={styles.messages_window} ref={messagesWindowRef}>
 				{messages.map((content, index) => (
-					<MessageItem role={content?.role} message={{ __html: content?.content }} key={index} isLoading={isLoading}/>
+					<MessageItem role={content?.role} message={{ __html: content?.content }} key={index}/>
 				))}
 				{!isLoading ? null :
-					<MessageItem role='assistant' message={{ __html: 'Loading' }} key={fakeId}/>}
+					<MessageItem role='assistant' message={{ __html: 'Loading' }} key={fakeId} isLoading={true}/>}
 			</div>
 			<div className={styles.textarea_block}>
 				<textarea className={styles.textarea} value={userMessage.value} onChange={userMessage.onChange} />

@@ -4,16 +4,20 @@ import gptIcon from './gpt-icon.svg';
 
 function MessageItem(props){
 
-	const {role, message} = props;
+	const {role, message, isLoading} = props;
 
 	return(
 		<div className={styles.message_block}>
 			<div>
 				<img className={styles.icon} src={role === 'user' ? studentIcon : gptIcon}/>
 			</div>
-			<div className={styles.message}>
-				<p dangerouslySetInnerHTML={message} />
-			</div>
+				{ isLoading 
+					? 
+					<span className={styles.loader}></span>
+					: 
+					<div className={styles.message}>
+						<p dangerouslySetInnerHTML={message}/>
+					</div>}
 		</div>
 	);
 };

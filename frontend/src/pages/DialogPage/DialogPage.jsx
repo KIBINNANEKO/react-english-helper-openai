@@ -3,10 +3,10 @@ import globalStyles from "../../scss/global.module.scss";
 
 import { useEffect, useState } from "react";
 import { useTheme } from "../../context/themeContext";
-import useDebounce from "../../hooks/useDebounce";
 import axios from "axios";
 import useInput from "../../hooks/useInput";
 import MessageWindow from "./components/MessageWindow/MessageWindow";
+import useDebounce from "../../hooks/useDebounce";
 
 
 function DialogPage () {
@@ -30,13 +30,15 @@ function DialogPage () {
 		}
 	}
 
-	const debounsedSendMessage = useDebounce(sendMessage, 2000);
+	const debouncedSendMessage = useDebounce(sendMessage, 100);
 
 	function submitMessage(message) {
 		try {
 			setMessages(prev => [...prev, { role: 'user', content: message }]);
-			userMessage.clear();
-			debounsedSendMessage(message, false);
+			setTimeout(() => {
+				userMessage.clear();
+				debouncedSendMessage(message, false);
+			}, 150)
 		}
 		catch (error) {
 			console.log(error);
@@ -44,10 +46,10 @@ function DialogPage () {
 	}
 
 	useEffect(()=>{
-		debounsedSendMessage(selectedTheme, false);
+		debouncedSendMessage(selectedTheme, false);
 
 		return function(){
-			debounsedSendMessage('no data', true);
+			debouncedSendMessage('no data', true);
 		}
 	}, []);
 

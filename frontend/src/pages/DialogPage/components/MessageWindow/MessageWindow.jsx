@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useId } from "react";
 import styles from "./message-window.module.scss";
 import MessageItem from "../MessageItem/MessageItem";
 
-const MessageWindow = ({ messages, userMessage, onSendMessage}) => {
+const MessageWindow = ({ messages, userMessage, onSendMessage, isLoading }) => {
 
 	const messagesWindowRef = useRef(null);
+
+	const fakeId = useId();
 
 	const scrollToBottom = () => {
 		if (messagesWindowRef.current) {
@@ -14,14 +16,16 @@ const MessageWindow = ({ messages, userMessage, onSendMessage}) => {
 
 	useEffect(() => {
 		scrollToBottom();
-	}, [messages]);
+	}, [messages, isLoading]);
 
 	return (
 		<div>
 			<div className={styles.messages_window} ref={messagesWindowRef}>
 				{messages.map((content, index) => (
-					<MessageItem role={content?.role} message={{ __html: content?.content }} key={index} />
+					<MessageItem role={content?.role} message={{ __html: content?.content }} key={index} isLoading={isLoading}/>
 				))}
+				{!isLoading ? null :
+					<MessageItem role='assistant' message={{ __html: 'Loading' }} key={fakeId}/>}
 			</div>
 			<div className={styles.textarea_block}>
 				<textarea className={styles.textarea} value={userMessage.value} onChange={userMessage.onChange} />

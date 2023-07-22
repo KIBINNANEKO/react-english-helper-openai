@@ -6,6 +6,14 @@ FOR EASIER VIEWING AND BETTER PERCEPTION, OPEN THE GIF IN FULL SCREEN.
 
 ![Gif](https://github.com/KIBINNANEKO/react-english-helper-openai/blob/main/frontend/src/assets/demonstration.gif)
 
+HOW IT SHOULD WORK:
+1. Select a topic from the list.
+2. Click on the chosen topic.
+3.  A dialogue with the model will begin, providing the fundamentals of that topic and several examples.
+4.  Continue the dialogue based on what you understand and what you don't.
+
+DISCLAIMER: The application does not provide practical value, as one can simply use Chat GPT. It was created for educational purposes. The development cost was 94 cents, spent to cover the expenses of Chat GPT API requests. (https://platform.openai.com/overview)
+
 "Mystic Teacher" - my own mini-project aimed at developing an interface that will interact with the Chat GPT model to assist in learning the English language.
 
 Development stages:

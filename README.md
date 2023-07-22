@@ -1,5 +1,10 @@
 # react-english-helper-openai
 
+Demonstration:
+FOR EASIER VIEWING AND BETTER PERCEPTION, OPEN THE GIF IN FULL SCREEN.
+
+![Gif](https://github.com/KIBINNANEKO/react-english-helper-openai/blob/main/frontend/src/assets/demonstration.gif)
+
 "Mystic Teacher" - my own mini-project aimed at developing an interface that will interact with the Chat GPT model to assist in learning the English language.
 
 Development stages:
@@ -25,8 +30,3 @@ Technology stack:
 3. React;
 4. Node.js + openai library;
 5. Figma (design).
-
-Demonstration:
-FOR EASIER VIEWING AND BETTER PERCEPTION, OPEN THE GIF IN FULL SCREEN.
-
-![Gif](https://github.com/KIBINNANEKO/react-english-helper-openai/blob/main/frontend/src/assets/demonstration.gif)

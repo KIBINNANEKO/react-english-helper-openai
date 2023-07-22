@@ -1,6 +1,6 @@
-Mystic Teacher
+# Mystic Teacher
 
-Demonstration:
+## Demonstration:
 
 FOR EASIER VIEWING AND BETTER PERCEPTION, OPEN THE GIF IN FULL SCREEN.
 

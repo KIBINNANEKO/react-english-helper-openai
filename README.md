@@ -1,4 +1,4 @@
-# Mystic Teacher
+Mystic Teacher
 
 ## Demonstration:
 

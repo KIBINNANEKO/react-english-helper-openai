@@ -4,7 +4,7 @@
 
 Development stages:
 
-1. Create the design project from scratch in Figma;
+1. Create the design project in Figma;
 2. Implement three pages (welcome, topic selection, dialogue) and components, and set up the interaction with React;
 3. Create a simple Node.js server and connect the Chat GPT model, configure prompts, and interaction methods using the openai library.
 

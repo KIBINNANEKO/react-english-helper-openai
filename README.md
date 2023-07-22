@@ -25,3 +25,7 @@ Technology stack:
 3. React;
 4. Node.js + openai library;
 5. Figma (design).
+
+Demonstration:
+
+![Gif](https://github.com/KIBINNANEKO/react-english-helper-openai/blob/main/frontend/src/assets/demonstration.gif)

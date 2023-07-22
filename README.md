@@ -27,5 +27,6 @@ Technology stack:
 5. Figma (design).
 
 Demonstration:
+FOR EASIER VIEWING AND BETTER PERCEPTION, OPEN THE GIF IN FULL SCREEN.
 
 ![Gif](https://github.com/KIBINNANEKO/react-english-helper-openai/blob/main/frontend/src/assets/demonstration.gif)
